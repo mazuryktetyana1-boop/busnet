@@ -416,6 +416,48 @@ td strong{color:var(--txt)}
   .seat-n{font-size:9px}.lgb{display:none}
 }
 select.fi option{background:var(--surf);color:var(--txt)}
+  /* --- FIX MOBILE RESPONSIVE --- */
+@media (max-width: 768px) {
+    /* Permette alla pagina di scorrere correttamente */
+    body, html {
+        height: auto !important;
+        overflow-y: auto !important;
+    }
+
+    /* Il contenitore principale non deve bloccare l'altezza */
+    .app-container {
+        height: auto !important;
+        min-height: 100vh;
+        display: block !important;
+    }
+
+    /* Sistema il footer per essere sempre visibile in fondo */
+    footer {
+        position: relative !important;
+        margin-top: 40px !important;
+        padding: 20px !important;
+        display: block !important;
+        background: var(--bg2);
+        border-top: 1px solid var(--brd);
+    }
+
+    /* Evita che le tabelle escano dallo schermo */
+    .table-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Ingrandisce i bottoni per il tocco delle dita */
+    .btn, .nav-item {
+        padding: 12px 15px;
+        margin-bottom: 5px;
+    }
+
+    /* Sistema la griglia dei widget (viaggi, statistiche) */
+    .grid-3, .grid-2 {
+        grid-template-columns: 1fr !important;
+    }
+}
 </style>
 
 <!-- ===== FIREBASE SDK ===== -->
