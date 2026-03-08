@@ -1,0 +1,75 @@
+Роутінг виглядає правильно. Перевірю DashboardPage - там може бути проблема з навігацією, коли user === null:
+Action: file_editor view /app/frontend/src/App.js
+Observation: [Showing lines 1190-1260 of 1522 total] /app/frontend/src/App.js:
+1190|      { id: "trips", label: "Рейси", icon: <Bus size={18} /> },
+1191|      { id: "bookings", label: "Бронювання", icon: <Ticket size={18} /> }
+1192|    ],
+1193|    admin: [
+1194|      { id: "overview", label: "Огляд", icon: <BarChart3 size={18} /> },
+1195|      { id: "users", label: "Користувачі", icon: <Users size={18} /> },
+1196|      { id: "routes", label: "Маршрути", icon: <RouteIcon size={18} /> },
+1197|      { id: "bookings", label: "Бронювання", icon: <Ticket size={18} /> }
+1198|    ]
+1199|  };
+1200|
+1201|  const currentTabs = tabs[user?.role] || tabs.passenger;
+1202|  const roleBadge = getRoleBadge(user?.role);
+1203|
+1204|  return (
+1205|    <div className="min-h-screen bg-[#0a0e1a]">
+1206|      {/* Sidebar */}
+1207|      <aside className="fixed left-0 top-0 bottom-0 w-64 glass border-r border-white/5 p-4 flex flex-col">
+1208|        <div className="flex items-center gap-2 mb-8 cursor-pointer" onClick={() => navigate("/")}>
+1209|          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+1210|            <Bus className="w-5 h-5 text-white" />
+1211|          </div>
+1212|          <span className="text-xl font-bold gradient-text">BUSNET</span>
+1213|        </div>
+1214|
+1215|        <nav className="flex-1 space-y-1">
+1216|          {currentTabs.map(tab => (
+1217|            <button
+1218|              key={tab.id}
+1219|              onClick={() => setActiveTab(tab.id)}
+1220|              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-semibold transition ${
+1221|                activeTab === tab.id
+1222|                  ? "bg-blue-500/20 text-blue-400"
+1223|                  : "text-white/50 hover:bg-white/5 hover:text-white"
+1224|              }`}
+1225|              data-testid={`tab-${tab.id}`}
+1226|            >
+1227|              {tab.icon}
+1228|              {tab.label}
+1229|            </button>
+1230|          ))}
+1231|        </nav>
+1232|
+1233|        <div className="border-t border-white/5 pt-4 mt-4">
+1234|          <div className="flex items-center gap-3 mb-3">
+1235|            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center font-bold">
+1236|              {user?.name?.charAt(0)}
+1237|            </div>
+1238|            <div className="flex-1 min-w-0">
+1239|              <div className="font-semibold truncate">{user?.name}</div>
+1240|              <span className={`badge ${roleBadge.class} text-[10px]`}>{roleBadge.label}</span>
+1241|            </div>
+1242|          </div>
+1243|          <button
+1244|            onClick={() => { logout(); navigate("/"); }}
+1245|            className="w-full flex items-center gap-2 px-4 py-2 rounded-lg text-white/50 hover:bg-red-500/10 hover:text-red-400 transition"
+1246|            data-testid="logout-sidebar-btn"
+1247|          >
+1248|            <LogOut size={18} />
+1249|            Вийти
+1250|          </button>
+1251|        </div>
+1252|      </aside>
+1253|
+1254|      {/* Main Content */}
+1255|      <main className="ml-64 p-8">
+1256|        <div className="max-w-6xl">
+1257|          {/* Header */}
+1258|          <div className="mb-8">
+1259|            <h1 className="text-2xl font-bold mb-1">
+1260|              {activeTab === "overview" && "Панель керування"}
+ [71 lines shown. Remaining: lines 1261-1522 (262 lines). Use view_range parameter to continue.]
